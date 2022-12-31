@@ -1,0 +1,48 @@
+user1={username:"user1", age:"34", email:"pepe@a.com"}; 
+db.users.insert(user1);
+db.users.insertOne(user1);
+
+db.users.insertMany([
+    {username:"user10", age:"24", email:"b@a.com", status: "inactivo"},
+    {username:"user11", age:"26", email:"c@a.com", status: "activo"},
+    {username:"user12", age:"88", email:"d@a.com", status: "inactivo"},
+    {username:"user13", age:"64", email:"q@a.com", status: "activo"},
+]);
+
+
+
+user9={username:"user9", age:"11", email:"oo@a.com"}; 
+db.users.save(user9);
+
+db.users.find();
+db.users.findOne({username:'user10'});
+db.users.find({age: {$gt: '50'}});
+db.users.find({age: {$lt: '50'}}).count();
+db.users.find({$and:[
+    {age: {$lt: '40'}},
+    {status: 'activo'}
+    ]});
+db.users.find({age:{$ne: '26'}});
+db.users.find({$or:[
+        {age:'24'},
+        {age:'26'}
+        ]});
+db.users.find({
+    age:{$in:['24','26']}
+});
+db.users.find({
+    status:{$exists: false}
+});
+db.users.find({
+    $and:[
+        {status:{$exists:true}},
+        {status:'activo'}
+    ]
+});
+db.users.find().sort({
+    age:-1
+});
+db.users.find().sort({
+    age:-1
+}).limit(1);
+db.users.find({email:'/.com$/'});
